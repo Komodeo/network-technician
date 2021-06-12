@@ -22,6 +22,7 @@ public class ModemController : MonoBehaviour
 
     private void OnMouseDown()
     {
+        StopAllCoroutines();
         pluggedIn = !pluggedIn;
         Debug.Log(name + " pluggedIn = " + pluggedIn);
         if (pluggedIn)
@@ -36,25 +37,31 @@ public class ModemController : MonoBehaviour
 
     IEnumerator Connect()
     {
-        StopCoroutine(Disconnect());
         yield return new WaitForSeconds(2);
         if (pluggedIn && rested)
         {
             connected = true;
             rested = false;
+            StartCoroutine(Entropy());
         }
         Debug.Log(name + " connected = " + connected);
     }
 
     IEnumerator Disconnect()
     {
-        StopCoroutine(Connect());
         connected = false;
         yield return new WaitForSeconds(2);
         if (!pluggedIn)
         {
             rested = true;
         }
+        Debug.Log(name + " connected = " + connected);
+    }
+
+    IEnumerator Entropy()
+    {
+        yield return new WaitForSeconds(5);
+        connected = false;
         Debug.Log(name + " connected = " + connected);
     }
 }
