@@ -1158,6 +1158,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3158129761611089374, guid: 12024dae73eb3c942953156f6897d2ba, type: 3}
   m_PrefabInstance: {fileID: 538437903}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1698164990 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1981857418264944, guid: 13db0b795570e514d9ca4d905d4abb93, type: 3}
+  m_PrefabInstance: {fileID: 1458884295}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1698164994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698164990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d8d89c64e8c404c902b31e7f0d5c2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chatTextFile: {fileID: 4900000, guid: 2cb336a0ac9d9e04eb0c5d329150266f, type: 3}
 --- !u!1001 &1902452173
 PrefabInstance:
   m_ObjectHideFlags: 0
