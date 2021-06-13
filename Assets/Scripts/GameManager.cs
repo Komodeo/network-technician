@@ -5,8 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static int score = 0;
-    public static int difficultyModifier = 25;
+    public static int difficultyModifier = 5;
     public static int chatNumber = 0;
+    public static bool gameOver;
 
     // Start is called before the first frame update
     void Start()

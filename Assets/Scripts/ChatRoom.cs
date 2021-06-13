@@ -23,7 +23,14 @@ public class ChatRoom : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DisplayChat(GameManager.chatNumber);
+        if (GameManager.chatNumber > eachLine.Count - 1)
+        {
+            GameManager.gameOver = true;
+        }
+        else
+        {
+            DisplayChat(GameManager.chatNumber);
+        }
     }
 
     public static string MakeString(int val, List<string> list)
