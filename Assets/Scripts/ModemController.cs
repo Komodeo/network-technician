@@ -11,8 +11,9 @@ public class ModemController : MonoBehaviour
     private Renderer indicatorRenderer;
     private Color indicatorOff = Color.black;
     private Color indicatorConnected = Color.green;
-    private Color indicatorConnecting = new Color(1f, .5f, 0f, 1f);
+    private Color indicatorConnecting = Color.green;
     private Color indicatorDisconnected = Color.red;
+    private Color indicatorDisconnecting = Color.yellow; //new Color(1f, .5f, 0f, 1f);
 
     // Start is called before the first frame update
     void Start()
@@ -70,11 +71,12 @@ public class ModemController : MonoBehaviour
     IEnumerator Disconnect()
     {
         connected = false;
-        indicatorRenderer.material.SetColor("_Color", indicatorOff);
+        indicatorRenderer.material.SetColor("_Color", indicatorDisconnecting);
         yield return new WaitForSeconds(2);
         if (!pluggedIn)
         {
             rested = true;
+            indicatorRenderer.material.SetColor("_Color", indicatorOff);
         }
     }
 
