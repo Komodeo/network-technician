@@ -8,10 +8,17 @@ public class ModemController : MonoBehaviour
     private bool pluggedIn = true;
     private bool rested;
 
+    private Renderer indicatorRenderer;
+    private Color indicatorOff = Color.black;
+    private Color indicatorConnected = Color.green;
+    private Color indicatorConnecting = new Color(1f, .5f, 0f, 1f);
+    private Color indicatorDisconnected = Color.red;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        indicatorRenderer = transform.GetChild(0).gameObject.GetComponent<Renderer>();
+        StartCoroutine(Entropy());
     }
 
     // Update is called once per frame
@@ -20,11 +27,11 @@ public class ModemController : MonoBehaviour
 
     }
 
+    // Plug or unplug modem on click
     private void OnMouseDown()
     {
         StopAllCoroutines();
         pluggedIn = !pluggedIn;
-        Debug.Log(name + " pluggedIn = " + pluggedIn);
         if (pluggedIn)
         {
             StartCoroutine(Connect());
@@ -35,33 +42,46 @@ public class ModemController : MonoBehaviour
         }
     }
 
+    // Plug modem in
     IEnumerator Connect()
     {
-        yield return new WaitForSeconds(2);
+        indicatorRenderer.material.SetColor("_Color", indicatorConnecting);
+        yield return new WaitForSeconds(.5f);
+        indicatorRenderer.material.SetColor("_Color", indicatorOff);
+        yield return new WaitForSeconds(.5f);
+        indicatorRenderer.material.SetColor("_Color", indicatorConnecting);
+        yield return new WaitForSeconds(.5f);
+        indicatorRenderer.material.SetColor("_Color", indicatorOff);
+        yield return new WaitForSeconds(.5f);
         if (pluggedIn && rested)
         {
             connected = true;
             rested = false;
+            indicatorRenderer.material.SetColor("_Color", indicatorConnected);
             StartCoroutine(Entropy());
         }
-        Debug.Log(name + " connected = " + connected);
+        else
+        {
+            indicatorRenderer.material.SetColor("_Color", indicatorDisconnected);
+        }
     }
 
+    // Unplug modem
     IEnumerator Disconnect()
     {
         connected = false;
+        indicatorRenderer.material.SetColor("_Color", indicatorOff);
         yield return new WaitForSeconds(2);
         if (!pluggedIn)
         {
             rested = true;
         }
-        Debug.Log(name + " connected = " + connected);
     }
 
     IEnumerator Entropy()
     {
         yield return new WaitForSeconds(5);
         connected = false;
-        Debug.Log(name + " connected = " + connected);
+        indicatorRenderer.material.SetColor("_Color", indicatorDisconnected);
     }
 }
