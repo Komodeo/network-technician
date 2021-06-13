@@ -15,10 +15,13 @@ public class ModemController : MonoBehaviour
     private Color indicatorDisconnected = Color.red;
     private Color indicatorDisconnecting = Color.yellow; //new Color(1f, .5f, 0f, 1f);
 
+    private ChatRoom chatRoom;
+
     // Start is called before the first frame update
     void Start()
     {
         indicatorRenderer = transform.GetChild(0).gameObject.GetComponent<Renderer>();
+        chatRoom = GameObject.Find("Editable Text").GetComponent<ChatRoom>();
         StartCoroutine(IncreaseScore());
         StartCoroutine(Entropy());
     }
@@ -82,7 +85,7 @@ public class ModemController : MonoBehaviour
         }
     }
 
-// Modem automatically disconnects
+    // Modem automatically disconnects
     IEnumerator Entropy()
     {
         yield return new WaitForSeconds(5);
@@ -90,14 +93,15 @@ public class ModemController : MonoBehaviour
         indicatorRenderer.material.SetColor("_Color", indicatorDisconnected);
     }
 
-// Score counts up while modem is connected
+    // Score counts up while modem is connected
     IEnumerator IncreaseScore()
     {
         while (connected)
         {
             GameManager.score++;
             GameManager.chatNumber = GameManager.score / GameManager.difficultyModifier;
-            Debug.Log("Chat number: " + GameManager.chatNumber);
+            //Debug.Log("Chat number: " + GameManager.chatNumber);
+            //chatRoom.DisplayChat(GameManager.chatNumber);
             yield return new WaitForSeconds(1);
         }
     }

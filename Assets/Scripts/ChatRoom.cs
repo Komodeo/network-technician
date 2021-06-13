@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ChatRoom : MonoBehaviour
 {
-    private Text textArea;    
+    private Text textArea;
     public TextAsset chatTextFile;
     private string displayText;
     private string fullTextFromFile;
@@ -18,22 +18,27 @@ public class ChatRoom : MonoBehaviour
         fullTextFromFile = chatTextFile.text;
         eachLine = new List<string>();
         eachLine.AddRange(fullTextFromFile.Split("\n"[0]));
-        displayText = eachLine[0] + "\n" + eachLine[1];
-        textArea.text = displayText;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        DisplayChat(GameManager.chatNumber);
     }
 
-    /* public void DisplayText(int max)
+    public static string MakeString(int val, List<string> list)
     {
-        foreach (var item in collection)
+        string[] sArr = new string[val + 1];
+        for (int i = 0; i < val + 1; i++)
         {
-            
+            sArr[i] = list[i];
         }
-        return displayText;
-    } */
+        return string.Join("\n", sArr);
+    }
+
+    public void DisplayChat(int val)
+    {
+        displayText = MakeString(val, eachLine);
+        textArea.text = displayText;
+    }
 }
