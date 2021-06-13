@@ -82,6 +82,7 @@ public class ModemController : MonoBehaviour
         }
     }
 
+// Modem automatically disconnects
     IEnumerator Entropy()
     {
         yield return new WaitForSeconds(5);
@@ -89,12 +90,14 @@ public class ModemController : MonoBehaviour
         indicatorRenderer.material.SetColor("_Color", indicatorDisconnected);
     }
 
+// Score counts up while modem is connected
     IEnumerator IncreaseScore()
     {
         while (connected)
         {
             GameManager.score++;
-            Debug.Log("Score: " + GameManager.score);
+            GameManager.chatNumber = GameManager.score / GameManager.difficultyModifier;
+            Debug.Log("Chat number: " + GameManager.chatNumber);
             yield return new WaitForSeconds(1);
         }
     }
