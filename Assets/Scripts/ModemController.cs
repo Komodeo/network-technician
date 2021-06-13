@@ -88,7 +88,8 @@ public class ModemController : MonoBehaviour
     // Modem automatically disconnects
     IEnumerator Entropy()
     {
-        yield return new WaitForSeconds(5);
+        float wait = Random.Range (1f, 10f);
+        yield return new WaitForSeconds(wait);
         connected = false;
         indicatorRenderer.material.SetColor("_Color", indicatorDisconnected);
     }
