@@ -19,6 +19,7 @@ public class ModemController : MonoBehaviour
     void Start()
     {
         indicatorRenderer = transform.GetChild(0).gameObject.GetComponent<Renderer>();
+        StartCoroutine(IncreaseScore());
         StartCoroutine(Entropy());
     }
 
@@ -59,6 +60,7 @@ public class ModemController : MonoBehaviour
             connected = true;
             rested = false;
             indicatorRenderer.material.SetColor("_Color", indicatorConnected);
+            StartCoroutine(IncreaseScore());
             StartCoroutine(Entropy());
         }
         else
@@ -85,5 +87,15 @@ public class ModemController : MonoBehaviour
         yield return new WaitForSeconds(5);
         connected = false;
         indicatorRenderer.material.SetColor("_Color", indicatorDisconnected);
+    }
+
+    IEnumerator IncreaseScore()
+    {
+        while (connected)
+        {
+            GameManager.score++;
+            Debug.Log("Score: " + GameManager.score);
+            yield return new WaitForSeconds(1);
+        }
     }
 }

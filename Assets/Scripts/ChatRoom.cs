@@ -27,4 +27,13 @@ public class ChatRoom : MonoBehaviour
     {
         
     }
+
+    /* public void DisplayText(int max)
+    {
+        foreach (var item in collection)
+        {
+            
+        }
+        return displayText;
+    } */
 }
